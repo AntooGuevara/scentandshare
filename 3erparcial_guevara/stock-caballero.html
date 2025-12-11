@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent & Share - Stock Caballero</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .stock-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .stock-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .stock-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .stock-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .stock-body {
+            padding: 40px 30px;
+        }
+        
+        .perfumes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .perfume-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .perfume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .perfume-image {
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .perfume-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .perfume-card:hover .perfume-image img {
+            transform: scale(1.05);
+        }
+        
+        .perfume-info {
+            padding: 20px;
+        }
+        
+        .perfume-brand {
+            font-size: 0.8rem;
+            color: #8a6d3b;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .perfume-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .perfume-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .stock-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .stock-amount {
+            font-weight: 600;
+            color: #27ae60;
+        }
+        
+        .stock-price {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(135deg, #8a6d3b 0%, #6b5228 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 109, 59, 0.3);
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .back-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: #8a6d3b;
+            border: 2px solid #8a6d3b;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: #8a6d3b;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 109, 59, 0.3);
+        }
+        
+        .decoration {
+            height: 5px;
+            background: linear-gradient(90deg, #2c3e50, #3498db, #2c3e50);
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .perfumes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stock-body {
+                padding: 30px 20px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stock-container">
+        <div class="stock-header">
+            <h1 class="stock-title">PERFUMES PARA CABALLERO</h1>
+            <p class="stock-subtitle">STOCK ACTUAL</p>
+        </div>
+        
+        <div class="decoration"></div>
+        
+        <div class="stock-body">
+            <div class="perfumes-grid">
+                <div class="perfume-card">
+                    <div class="perfume-image">
+                        <img src="imagenes/erosflame.webp" alt="Eros Flame - Versace" onerror="this.src='https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'">
+                    </div>
+                    <div class="perfume-info">
+                        <div class="perfume-brand">Versace</div>
+                        <h3 class="perfume-name">Eros Flame</h3>
+                        <p class="perfume-desc">Fragancia intensa con mandarina, limón y pimienta. Pasión y energía en cada gota.</p>
+                        <div class="stock-info">
+                            <span class="stock-amount">Stock: 15</span>
+                            <span class="stock-price">$125.99</span>
+                        </div>
+                        <button class="buy-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            COMPRAR
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="perfume-card">
+                    <div class="perfume-image">
+                        <img src="imagenes/jpg_paradise_garden.webp" alt="Paradise Garden - Jean Paul Gaultier" onerror="this.src='https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'">
+                    </div>
+                    <div class="perfume-info">
+                        <div class="perfume-brand">Jean Paul Gaultier</div>
+                        <h3 class="perfume-name">Paradise Garden</h3>
+                        <p class="perfume-desc">Notas tropicales con coco, ylang-ylang y vainilla. Un paraíso en fragancia.</p>
+                        <div class="stock-info">
+                            <span class="stock-amount">Stock: 22</span>
+                            <span class="stock-price">$135.50</span>
+                        </div>
+                        <button class="buy-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            COMPRAR
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="perfume-card">
+                    <div class="perfume-image">
+                        <img src="imagenes/jpg_perfum.avif" alt="Le Male Parfum - Jean Paul Gaultier" onerror="this.src='https://images.unsplash.com/photo-1590736969955-71ac446dfc30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'">
+                    </div>
+                    <div class="perfume-info">
+                        <div class="perfume-brand">Jean Paul Gaultier</div>
+                        <h3 class="perfume-name">Le Male Parfum</h3>
+                        <p class="perfume-desc">Cardamomo, iris y vainilla. Una versión más intensa del clásico icónico.</p>
+                        <div class="stock-info">
+                            <span class="stock-amount">Stock: 8</span>
+                            <span class="stock-price">$142.75</span>
+                        </div>
+                        <button class="buy-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            COMPRAR
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="perfume-card">
+                    <div class="perfume-image">
+                        <img src="imagenes/scandal_pourhomme.webp" alt="Scandal Pour Homme - Jean Paul Gaultier" onerror="this.src='https://images.unsplash.com/photo-1615634260167-046c5c336969?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'">
+                    </div>
+                    <div class="perfume-info">
+                        <div class="perfume-brand">Jean Paul Gaultier</div>
+                        <h3 class="perfume-name">Scandal Pour Homme</h3>
+                        <p class="perfume-desc">Miel, sangre de dragón y café. Una fragancia atrevida y masculina.</p>
+                        <div class="stock-info">
+                            <span class="stock-amount">Stock: 12</span>
+                            <span class="stock-price">$128.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            COMPRAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="#" class="back-btn" onclick="goToCatalogo()">
+                    <i class="fas fa-arrow-left"></i>
+                    VOLVER AL CATÁLOGO
+                </a>
+                <a href="#" class="back-btn" onclick="goToLogin()">
+                    <i class="fas fa-home"></i>
+                    REGRESAR AL INICIO
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToLogin() {
+            window.location.href = 'index.html';
+        }
+        
+        function goToCatalogo() {
+            window.location.href = 'catalogo.html';
+        }
+        
+        // Funcionalidad de compra
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const perfumeCard = this.closest('.perfume-card');
+                const perfumeName = perfumeCard.querySelector('.perfume-name').textContent;
+                const perfumePrice = perfumeCard.querySelector('.stock-price').textContent.replace('$', '');
+                
+                // Redirigir a página de pago con los datos del producto
+                window.location.href = `pago.html?product=${encodeURIComponent(perfumeName)}&price=${perfumePrice}`;
+            });
+        });
+    </script>
+</body>
+</html>
