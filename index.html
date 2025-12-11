@@ -194,25 +194,28 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Validación estricta para admin
+        if (email === "admin@admin" && password === "admin") {
+
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
+            loginBtn.disabled = true;
             
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Validación simple
-            if (email && password) {
-                // Simular proceso de login
-                const loginBtn = document.querySelector('.login-btn');
-                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando sesión...';
-                loginBtn.disabled = true;
-                
-                setTimeout(() => {
-                    // Redirigir a la página del catálogo
-                    window.location.href = 'catalogo.html';
-                }, 1500);
-            }
-        });
-    </script>
+            setTimeout(() => {
+                window.location.href = 'catalogo.html';
+            }, 1500);
+
+        } else {
+            alert("Correo o contraseña incorrectos.\nSolo el administrador puede ingresar.");
+        }
+    });
+</script>
 </body>
+
 </html>
