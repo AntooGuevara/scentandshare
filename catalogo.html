@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent & Share - Catálogo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .catalog-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .catalog-header {
+            background: linear-gradient(135deg, #8a6d3b 0%, #6b5228 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .catalog-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .catalog-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .catalog-body {
+            padding: 40px 30px;
+        }
+        
+        .categories-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .category-card {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-header {
+            padding: 25px 20px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .caballero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        }
+        
+        .dama {
+            background: linear-gradient(135deg, #b565a7 0%, #e8c4d9 100%);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-body {
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .perfume-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .perfume-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+        }
+        
+        .perfume-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .stock-btn {
+            background: linear-gradient(135deg, #8a6d3b 0%, #6b5228 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 109, 59, 0.3);
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .back-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: #8a6d3b;
+            border: 2px solid #8a6d3b;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: #8a6d3b;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 109, 59, 0.3);
+        }
+        
+        .decoration {
+            height: 5px;
+            background: linear-gradient(90deg, #8a6d3b, #b565a7, #8a6d3b);
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .user-name {
+            color: #8a6d3b;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .categories-container {
+                flex-direction: column;
+            }
+            
+            .catalog-body {
+                padding: 30px 20px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="catalog-container">
+        <div class="catalog-header">
+            <h1 class="catalog-title">Scent & Share</h1>
+            <p class="catalog-subtitle">Descubre tu fragancia perfecta</p>
+        </div>
+        
+        <div class="decoration"></div>
+        
+        <div class="catalog-body">
+            <div class="welcome-message">
+                ¡Bienvenido de nuevo, <span class="user-name"></span>!
+            </div>
+            
+            <div class="categories-container">
+                <div class="category-card" onclick="goToStockCaballero()">
+                    <div class="category-header caballero">
+                        <div class="category-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Perfumes para Caballero</h3>
+                    </div>
+                    <div class="category-body">
+                        <p>Fragancias elegantes y sofisticadas para el hombre moderno</p>
+                        <ul class="perfume-list">
+                            <li>Eros Flame</li>
+                            <li>Paradise Garden</li>
+                            <li>Le Male Parfum</li>
+                            <li>Scandal Pour Homme</li>
+                        </ul>
+                        <button class="stock-btn">
+                            <i class="fas fa-boxes"></i>
+                            Ver Stock
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="category-card" onclick="goToStockDama()">
+                    <div class="category-header dama">
+                        <div class="category-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h3>Perfumes Dama</h3>
+                    </div>
+                    <div class="category-body">
+                        <p>Fragancias delicadas y seductoras para la mujer actual</p>
+                        <ul class="perfume-list">
+                            <li>White Diamonds</li>
+                            <li>Scandal for Women</li>
+                            <li>Good Girl</li>
+                            <li>Coco Mademoiselle</li>
+                        </ul>
+                        <button class="stock-btn">
+                            <i class="fas fa-boxes"></i>
+                            Ver Stock
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="#" class="back-btn" onclick="goToLogin()">
+                    <i class="fas fa-arrow-left"></i>
+                    REGRESAR AL INICIO
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToLogin() {
+            window.location.href = 'index.html';
+        }
+        
+        function goToStockCaballero() {
+            window.location.href = 'stock-caballero.html';
+        }
+        
+        function goToStockDama() {
+            window.location.href = 'stock-dama.html';
+        }
+        //usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            document.querySelector('.user-name').textContent = userName;
+        });
+    </script>
+</body>
+</html>
